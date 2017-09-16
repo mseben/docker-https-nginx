@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+
+  nginx:
+    #    build: docker-nginx
+    image: "nginx"
+    ports:
+      - 0.0.0.0:443:443
+    volumes:
+      - /var/lib/letsencrypt/:/var/lib/letsencrypt/:ro
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
+
+  certbot:
+    stdin_open: true
+    tty: true
+    #image: "certbot/certbot"
+    build: docker-certbot
+    ports:
+      - 0.0.0.0:443:443
+    volumes:
+      - /var/lib/letsencrypt/:/var/lib/letsencrypt/
+      - /etc/letsencrypt/:/etc/letsencrypt/
