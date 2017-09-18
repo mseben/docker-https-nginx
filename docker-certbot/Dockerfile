@@ -1,6 +1,6 @@
 FROM    resin/rpi-raspbian:stretch
 
-EXPOSE  80 443
+EXPOSE  443
 VOLUME  /etc/letsencrypt /var/lib/letsencrypt
 
 RUN     apt-get update

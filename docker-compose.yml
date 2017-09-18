@@ -3,8 +3,8 @@ version: "3"
 services:
 
   nginx:
-    #    build: docker-nginx
-    image: "nginx"
+    build: docker-nginx
+    #image: "nginx"
     ports:
       - 0.0.0.0:443:443
     volumes:
@@ -14,7 +14,6 @@ services:
   certbot:
     stdin_open: true
     tty: true
-    #image: "certbot/certbot"
     build: docker-certbot
     ports:
       - 0.0.0.0:443:443
