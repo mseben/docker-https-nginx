@@ -1,0 +1,15 @@
+server {
+  root /var/www/html;
+
+  listen 443 ssl default_server;
+  server_name example.com;
+  ssl_certificate /etc/letsencrypt/live/www.example.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/www.example.com/privkey.pem;
+
+  location / {
+    # First attempt to serve request as file, then
+    # as directory, then fall back to displaying a 404.
+    try_files $uri $uri/ =404;
+  }
+}
+

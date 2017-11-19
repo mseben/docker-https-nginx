@@ -2,22 +2,46 @@ version: "3"
 
 services:
 
-  nginx:
-    build: docker-nginx
+  https-nginx:
+    env_file:
+      - domain.env
+    build: https-nginx
     ports:
-      - 0.0.0.0:443:443
+      - "443:443"
     volumes:
       - /var/lib/letsencrypt/:/var/lib/letsencrypt/:ro
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
       - /var/www/html/:/var/www/html/:ro
       - /var/log/nginx/:/var/log/nginx/
+    command: nginx
 
   certbot:
     stdin_open: true
     tty: true
-    build: docker-certbot
+    build: certbot
     ports:
       - 0.0.0.0:443:443
     volumes:
       - /var/lib/letsencrypt/:/var/lib/letsencrypt/
       - /etc/letsencrypt/:/etc/letsencrypt/
+
+#https_nginx:
+#    build: https_nginx
+#    ports:
+#      - "443:443"
+#    volumes:
+#      - /var/lib/letsencrypt/:/var/lib/letsencrypt/:ro
+#      - /etc/letsencrypt/:/etc/letsencrypt/:ro
+#      - /var/www/html/:/var/www/html/:ro
+#      - /var/log/nginx/:/var/log/nginx/
+#    command: nginx
+        #
+#        #  certbot:
+#        #    stdin_open: true
+#        #    tty: true
+#        #    build: docker-certbot
+#        #    ports:
+#        #      - "0.0.0.0:443:443"
+#        #    volumes:
+#        #      - /var/lib/letsencrypt/:/var/lib/letsencrypt/
+#        #      - /etc/letsencrypt/:/etc/letsencrypt/
