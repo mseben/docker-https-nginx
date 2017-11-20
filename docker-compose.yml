@@ -15,6 +15,14 @@ services:
       - /var/log/nginx/:/var/log/nginx/
     command: nginx
 
+  influx-db:
+    build: influx-db
+    ports:
+      - "8083:8083"
+    volumes:
+      - /var/lib/influx-db:/data/
+      - /var/log/influxdb/:/var/log/influxdb/
+
   certbot:
     stdin_open: true
     tty: true
@@ -25,23 +33,3 @@ services:
       - /var/lib/letsencrypt/:/var/lib/letsencrypt/
       - /etc/letsencrypt/:/etc/letsencrypt/
 
-#https_nginx:
-#    build: https_nginx
-#    ports:
-#      - "443:443"
-#    volumes:
-#      - /var/lib/letsencrypt/:/var/lib/letsencrypt/:ro
-#      - /etc/letsencrypt/:/etc/letsencrypt/:ro
-#      - /var/www/html/:/var/www/html/:ro
-#      - /var/log/nginx/:/var/log/nginx/
-#    command: nginx
-        #
-#        #  certbot:
-#        #    stdin_open: true
-#        #    tty: true
-#        #    build: docker-certbot
-#        #    ports:
-#        #      - "0.0.0.0:443:443"
-#        #    volumes:
-#        #      - /var/lib/letsencrypt/:/var/lib/letsencrypt/
-#        #      - /etc/letsencrypt/:/etc/letsencrypt/
