@@ -19,8 +19,9 @@ services:
     build: influx-db
     ports:
       - "8083:8083"
+      - "8086:8086"
     volumes:
-      - /var/lib/influx-db:/data/
+      - /var/lib/influx-db:/var/lib/influx-db/
       - /var/log/influxdb/:/var/log/influxdb/
 
   certbot:
@@ -29,7 +30,7 @@ services:
     build: certbot
     ports:
       - 0.0.0.0:443:443
+      - 0.0.0.0:80:80
     volumes:
       - /var/lib/letsencrypt/:/var/lib/letsencrypt/
       - /etc/letsencrypt/:/etc/letsencrypt/
-
