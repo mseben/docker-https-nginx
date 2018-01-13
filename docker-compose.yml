@@ -24,6 +24,11 @@ services:
       - /var/lib/influx-db:/var/lib/influx-db/
       - /var/log/influxdb/:/var/log/influxdb/
 
+  kapacitor:
+    build: kapacitor
+    volumes:
+      - /var/lib/kapacitor:/var/lib/kapacitor/
+
   certbot:
     stdin_open: true
     tty: true
