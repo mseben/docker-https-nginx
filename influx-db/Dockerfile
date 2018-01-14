@@ -1,7 +1,5 @@
 FROM    resin/rpi-raspbian:stretch
 
-#administration port
-EXPOSE  8083
 #HTTP API endpoint port
 EXPOSE  8086
 
