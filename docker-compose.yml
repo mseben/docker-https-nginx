@@ -21,8 +21,7 @@ services:
       - "8083:8083"
       - "8086:8086"
     volumes:
-      - /var/lib/influx-db:/var/lib/influx-db/
-      - /var/log/influxdb/:/var/log/influxdb/
+      - /var/lib/influxdb:/var/lib/influxdb/
 
   kapacitor:
     build: kapacitor

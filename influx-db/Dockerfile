@@ -5,7 +5,7 @@ EXPOSE  8083
 #HTTP API endpoint port
 EXPOSE  8086
 
-VOLUME  /var/lib/influxdb /var/log/influxdb/
+VOLUME  /var/lib/influxdb
 
 RUN     apt-get update
 RUN     apt-get install -y lsof curl net-tools vim sed apt-transport-https
