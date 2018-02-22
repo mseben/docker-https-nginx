@@ -2,41 +2,22 @@ version: "3"
 
 services:
 
-  influx-db:
-    build: influx-db
-    ports:
-      - "8086:8086"
-    volumes:
-      - /var/lib/influxdb/:/var/lib/influxdb/
-
-  kapacitor:
-    build: kapacitor
-    volumes:
-      - /var/lib/kapacitor/:/var/lib/kapacitor/
-    links:
-      - influx-db
-
-  chronograf:
-    build: chronograf
-    ports:
-      - "8888:8888"
-    volumes:
-      - /var/lib/chronograf/:/var/lib/chronograf/
-    links:
-      - influx-db
-
   https-nginx:
     env_file:
       - domain.env
     build: https-nginx
     ports:
       - "443:443"
+      - "8080:8080"
     volumes:
       - /var/lib/letsencrypt/:/var/lib/letsencrypt/:ro
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
+      - /etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
       - /var/www/html/:/var/www/html/:ro
       - /var/log/nginx/:/var/log/nginx/
     command: nginx
+    links:
+      - influx-db
 
   certbot:
     stdin_open: true
